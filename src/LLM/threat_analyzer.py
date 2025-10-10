@@ -29,6 +29,18 @@ except ImportError as e:
     print("Please ensure your project has the correct structure with __init__.py files.")
     sys.exit(1)
 
+def extract_json_from_string(text):
+    """Finds and parses the first valid JSON object within a string."""
+    # Find the first '{' and the last '}'
+    start_index = text.find('{')
+    end_index = text.rfind('}')
+    if start_index != -1 and end_index != -1 and end_index > start_index:
+        json_str = text[start_index:end_index+1]
+        try:
+            return json.loads(json_str)
+        except json.JSONDecodeError:
+            return None
+    return None
 
 # =====================================================================================
 # --- RAG Security Analyzer Class ---
@@ -74,23 +86,51 @@ class RAGSecurityAnalyzer:
         _, indices = self.retriever.kneighbors(query_vector)
         return self.knowledge_df.iloc[indices[0]]
 
+    # In your RAGSecurityAnalyzer class...
+
     def analyze(self, new_log_entry):
+        """
+        Performs the full RAG process with a simplified, direct prompt.
+        """
         print(f"\nAnalyzing new log entry: '{new_log_entry}'")
         try:
+            # --- THIS IS THE MISSING LOGIC ---
+            # 1. Retrieve similar examples
             similar_examples = self._find_similar_examples(new_log_entry)
             print(f"Found {len(similar_examples)} similar examples from knowledge base.")
+            
+            # 2. Build the prompt as a list of parts
             prompt_parts = []
             for index, row in similar_examples.iterrows():
                 prompt_parts.append(f"Log: {row['log_entry']}\nAnalysis:\n{row['json_analysis']}")
-            prompt_parts.append(f"Log: {new_log_entry}\nAnalysis:")
-            final_prompt = "\n---\n".join(prompt_parts)
             
+            # Add the new log entry to complete the pattern
+            prompt_parts.append(f"Log: {new_log_entry}\nAnalysis:")
+            
+            # Join the parts into the final prompt string
+            final_prompt = "\n---\n".join(prompt_parts)
+            # --- END OF MISSING LOGIC ---
+
             print("Querying LLM with simplified, direct prompt...")
-            response = ollama.generate(model=self.model, prompt=final_prompt, format='json')
-            return json.loads(response['response'])
+            response = ollama.generate(
+                model=self.model,
+                prompt=final_prompt, # This variable now exists
+                format='json'
+            )
+            
+            raw_response_text = response['response']
+            parsed_json = extract_json_from_string(raw_response_text)
+            
+            if parsed_json is None:
+                print(f"An error occurred in RAGSecurityAnalyzer.analyze: Could not find valid JSON in the model's response.")
+                print(f"Raw Response: {raw_response_text}")
+                return None
+            
+            return parsed_json
+            
         except Exception as e:
             print(f"An error occurred in RAGSecurityAnalyzer.analyze: {e}")
-            traceback.print_exc() # Print the full error details
+            traceback.print_exc()
             return None
 
 

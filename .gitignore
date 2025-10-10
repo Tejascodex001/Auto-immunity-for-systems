@@ -6,3 +6,4 @@ models/*.pt
 data/
 *.jsonl
 *.log
+*.zip
