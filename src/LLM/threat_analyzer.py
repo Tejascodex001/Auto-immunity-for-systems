@@ -1,4 +1,4 @@
-# rag_analyzer.py (Final Version)
+# rag_analyzer.py (Final, Complete Version)
 
 import ollama
 import json
@@ -8,20 +8,26 @@ from sklearn.neighbors import NearestNeighbors
 import os
 import sys
 import glob
+import traceback # For detailed error logging
 
-# --- This section handles importing from your structured 'src/' directory ---
+# --- Stable Baselines for loading the trained agent ---
+from stable_baselines3 import PPO
+
+# --- Import all our custom modules ---
 try:
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Go up one level from '/llm/' to '/src/'
     src_dir = os.path.dirname(current_dir)
+    # Check for __init__.py to validate the structure
+    if not os.path.exists(os.path.join(src_dir, '__init__.py')):
+        print(f"Warning: Missing __init__.py in {src_dir}. Imports may fail.")
     sys.path.append(src_dir)
     from executor.executor import Executor
     from log_parser.log_parser import LogParser
-except (ImportError, ValueError):
-    # This is a fallback in case the file structure is different
-    print("Warning: Could not perform relative imports. Assuming all modules are in the same directory.")
-    from executor import Executor
-    from log_parser import LogParser
+    from environment.security_env import SecurityEnv
+except ImportError as e:
+    print(f"CRITICAL ERROR: Could not import a required module. Error: {e}")
+    print("Please ensure your project has the correct structure with __init__.py files.")
+    sys.exit(1)
 
 
 # =====================================================================================
@@ -29,20 +35,12 @@ except (ImportError, ValueError):
 # =====================================================================================
 class RAGSecurityAnalyzer:
     def __init__(self, knowledge_base_dir, llm_model='phi3:mini', n_neighbors=3):
-        """
-        Initializes the RAG analyzer by automatically loading all .jsonl files
-        from a specified directory.
-        """
         self.model = llm_model
         self.n_neighbors = n_neighbors
         print("Initializing RAG Security Analyzer...")
-
-        # Automatically find all files ending with .jsonl in the provided directory
         knowledge_base_paths = glob.glob(os.path.join(knowledge_base_dir, '*.jsonl'))
-
         if not knowledge_base_paths:
             raise ValueError(f"No .jsonl files found in the directory: {knowledge_base_dir}")
-
         self.knowledge_df = self._load_knowledge_base(knowledge_base_paths)
         if self.knowledge_df.empty:
             raise ValueError("Knowledge base is empty after loading files.")
@@ -78,77 +76,80 @@ class RAGSecurityAnalyzer:
 
     def analyze(self, new_log_entry):
         print(f"\nAnalyzing new log entry: '{new_log_entry}'")
-        similar_examples = self._find_similar_examples(new_log_entry)
-        print(f"Found {len(similar_examples)} similar examples from knowledge base.")
-        prompt_parts = []
-        for index, row in similar_examples.iterrows():
-            prompt_parts.append(f"Log: {row['log_entry']}\nAnalysis:\n{row['json_analysis']}")
-        prompt_parts.append(f"Log: {new_log_entry}\nAnalysis:")
-        final_prompt = "\n---\n".join(prompt_parts)
-        print("Querying LLM with simplified, direct prompt...")
         try:
+            similar_examples = self._find_similar_examples(new_log_entry)
+            print(f"Found {len(similar_examples)} similar examples from knowledge base.")
+            prompt_parts = []
+            for index, row in similar_examples.iterrows():
+                prompt_parts.append(f"Log: {row['log_entry']}\nAnalysis:\n{row['json_analysis']}")
+            prompt_parts.append(f"Log: {new_log_entry}\nAnalysis:")
+            final_prompt = "\n---\n".join(prompt_parts)
+            
+            print("Querying LLM with simplified, direct prompt...")
             response = ollama.generate(model=self.model, prompt=final_prompt, format='json')
             return json.loads(response['response'])
         except Exception as e:
-            print(f"An error occurred while querying Ollama: {e}")
+            print(f"An error occurred in RAGSecurityAnalyzer.analyze: {e}")
+            traceback.print_exc() # Print the full error details
             return None
+
 
 # =====================================================================================
 # --- Main Execution Block ---
 # =====================================================================================
 if __name__ == "__main__":
     # --- Configuration ---
-    # Point to the single directory containing all your .jsonl knowledge base files.
     KNOWLEDGE_BASE_DIRECTORY = "/home/tejas/Projects/AIS/data/"
-    INTERESTING_KEYWORDS = ["Failed password", "invalid user", "session opened", "command="]
+    INTERESTING_KEYWORDS = ["Failed password", "invalid user", "session opened"]
     RAW_LOG_FILE_TO_ANALYZE = "auth.log"
     ANALYSIS_OUTPUT_FILE = "analysis_results.jsonl"
+    RL_AGENT_PATH = "/home/tejas/Projects/AIS/ais_rl_agent_ppo.zip"
     # ----------------------------------------------------
 
-    # Create a dummy log file for the example
+    # Create a dummy log file
     with open(RAW_LOG_FILE_TO_ANALYZE, "w") as f:
         f.write("Oct 10 14:35:10 my-server sshd: Failed password for invalid user 'admin' from 103.207.39.21\n")
         f.write("Oct 10 14:35:14 my-server sshd: session opened for user tejas\n")
 
     # --- Pipeline Execution ---
     try:
-        # 1. Initialize all components
         log_parser = LogParser(keywords=INTERESTING_KEYWORDS)
-        # Pass the directory to the analyzer
-        rag_analyzer = RAGSecurityAnalyzer(knowledge_base_dir=KNOWLEDGE_BASE_DIRECTORY, llm_model='phi3:mini')
+        rag_analyzer = RAGSecurityAnalyzer(knowledge_base_dir=KNOWLEDGE_BASE_DIRECTORY)
         executor = Executor(dry_run=True)
 
-        # 2. Open the output file in "append" mode
+        if not os.path.exists(RL_AGENT_PATH):
+            raise FileNotFoundError(f"Trained RL Agent not found at: {RL_AGENT_PATH}")
+        print(f"Loading trained RL agent from: {RL_AGENT_PATH}")
+        rl_env = SecurityEnv()
+        rl_agent = PPO.load(RL_AGENT_PATH, env=rl_env)
+        print("RL Agent loaded successfully.")
+        
         with open(ANALYSIS_OUTPUT_FILE, 'a') as output_log:
-            # Get the stream of important events
             important_events = log_parser.parse_log_file(RAW_LOG_FILE_TO_ANALYZE)
-
-            print("\nStarting automated analysis pipeline...")
-            print(f"Full analysis results will be saved to '{ANALYSIS_OUTPUT_FILE}'")
+            print("\nStarting AI-driven analysis pipeline...")
             print("------------------------------------------------------")
-
-            # 3. Process each event
             for event in important_events:
                 final_analysis = rag_analyzer.analyze(event)
-                
                 if final_analysis:
-                    # Concise logging to the terminal
-                    summary = final_analysis.get('summary', 'No summary.')
-                    risk = final_analysis.get('risk_level', 'UNKNOWN')
-                    threat = final_analysis.get('threat_type', 'N/A')
-                    print(f"Analyzed Event: Risk=[{risk}] Threat=[{threat}] Summary=[{summary}]")
-                    
-                    # Save full JSON to the output file
                     output_log.write(json.dumps(final_analysis) + '\n')
+                    observation = rl_env.get_obs_from_analysis(final_analysis)
+                    action, _ = rl_agent.predict(observation, deterministic=True)
+                    action_map = {0: "Do Nothing", 1: "Monitor", 2: "Block IP"}
+                    chosen_action = action_map.get(int(action), "Unknown")
                     
-                    # Pass to executor if high-risk
-                    if risk.lower() in ['high', 'critical']:
-                        print("High-Risk Event Detected. Passing to Executor.")
+                    print(f"Analyzed Event: '{event}'")
+                    print(f"  - RAG Analysis: Risk=[{final_analysis.get('risk_level', 'N/A')}], Threat=[{final_analysis.get('threat_type', 'N/A')}]")
+                    print(f"  - RL Agent Decision: Chose action '{chosen_action}'")
+                    
+                    if chosen_action == "Block IP":
+                        print("  - Action: High-risk decision. Passing to Executor.")
                         executor.process_actions(final_analysis)
+                    elif chosen_action == "Monitor":
+                        print("  - Action: Monitoring.")
                 else:
                     print(f"Analysis failed for event: '{event}'")
-                
-                print("---") # Separator
+                print("---")
 
     except Exception as e:
         print(f"\nAn unexpected error occurred during pipeline execution: {e}")
+        traceback.print_exc()
