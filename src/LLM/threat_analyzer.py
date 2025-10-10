@@ -140,16 +140,22 @@ class RAGSecurityAnalyzer:
 if __name__ == "__main__":
     # --- Configuration ---
     KNOWLEDGE_BASE_DIRECTORY = "/home/tejas/Projects/AIS/data/"
-    INTERESTING_KEYWORDS = ["Failed password", "invalid user", "session opened"]
-    RAW_LOG_FILE_TO_ANALYZE = "auth.log"
+    INTERESTING_KEYWORDS = [
+        "Login failed", 
+        "User logged in",
+        # You can keep old keywords to support multiple log types
+        "Failed password", 
+        "session opened",
+    ]
+    RAW_LOG_FILE_TO_ANALYZE = "/home/tejas/Projects/AIS/app.log"
     ANALYSIS_OUTPUT_FILE = "analysis_results.jsonl"
     RL_AGENT_PATH = "/home/tejas/Projects/AIS/ais_rl_agent_ppo.zip"
     # ----------------------------------------------------
 
     # Create a dummy log file
-    with open(RAW_LOG_FILE_TO_ANALYZE, "w") as f:
-        f.write("Oct 10 14:35:10 my-server sshd: Failed password for invalid user 'admin' from 103.207.39.21\n")
-        f.write("Oct 10 14:35:14 my-server sshd: session opened for user tejas\n")
+    # with open(RAW_LOG_FILE_TO_ANALYZE, "w") as f:
+    #     f.write("Oct 10 14:35:10 my-server sshd: Failed password for invalid user 'admin' from 103.207.39.21\n")
+    #     f.write("Oct 10 14:35:14 my-server sshd: session opened for user tejas\n")
 
     # --- Pipeline Execution ---
     try:
