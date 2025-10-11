@@ -128,7 +128,7 @@ def load_json_data(uploaded_file):
         return pd.DataFrame()
 
 def standardize_dataframe(df):
-    """Ensure all required columns exist with defaults."""
+    """Ensure all required columns exist with defaults and clean data types."""
     required_columns = {
         'timestamp': 'N/A',
         'source_ip': 'Unknown',
@@ -141,6 +141,15 @@ def standardize_dataframe(df):
     for col, default_val in required_columns.items():
         if col not in df.columns:
             df[col] = default_val
+    
+    # Convert all columns to strings where appropriate to avoid sorting issues
+    df['risk_level'] = df['risk_level'].fillna('n/a').astype(str).str.lower()
+    df['threat_type'] = df['threat_type'].fillna('Unknown').astype(str)
+    df['source_ip'] = df['source_ip'].fillna('Unknown').astype(str)
+    
+    # Ensure is_attack is boolean
+    if df['is_attack'].dtype == 'object':
+        df['is_attack'] = df['is_attack'].map({'Yes': True, 'No': False, True: True, False: False})
     
     return df
 
@@ -212,7 +221,7 @@ if uploaded_file is not None:
             df = df[df['is_attack'] == False]
         
         # Filter by Risk Level
-        risk_levels = sorted(df['risk_level'].unique())
+        risk_levels = sorted([str(x) for x in df['risk_level'].unique() if pd.notna(x)])
         selected_risks = st.sidebar.multiselect(
             'Risk Level:',
             options=risk_levels,
@@ -220,7 +229,7 @@ if uploaded_file is not None:
         )
         
         # Filter by Threat Type
-        threat_types = sorted(df['threat_type'].unique())
+        threat_types = sorted([str(x) for x in df['threat_type'].unique() if pd.notna(x)])
         selected_threats = st.sidebar.multiselect(
             'Threat Type:',
             options=threat_types,
@@ -229,7 +238,7 @@ if uploaded_file is not None:
         
         # Filter by Source IP (optional)
         if st.sidebar.checkbox("Filter by Source IP"):
-            unique_ips = sorted(df['source_ip'].unique())
+            unique_ips = sorted([str(x) for x in df['source_ip'].unique() if pd.notna(x)])
             selected_ips = st.sidebar.multiselect(
                 'Source IP:',
                 options=unique_ips
@@ -298,7 +307,7 @@ if uploaded_file is not None:
                 yaxis_title="Number of Events",
                 showlegend=False
             )
-            st.plotly_chart(fig_risk, use_container_width=True)
+            st.plotly_chart(fig_risk, width="stretch")
 
         with viz_row1_col2:
             st.subheader("Attack vs Normal Events")
@@ -310,7 +319,7 @@ if uploaded_file is not None:
                 hole=0.4,
                 color_discrete_sequence=['#dc3545', '#28a745']
             )
-            st.plotly_chart(fig_attack, use_container_width=True)
+            st.plotly_chart(fig_attack, width="stretch")
         
         viz_row2_col1, viz_row2_col2 = st.columns(2)
         
@@ -324,7 +333,7 @@ if uploaded_file is not None:
                 labels={'x': 'Count', 'y': 'Threat Type'}
             )
             fig_threat.update_layout(yaxis={'categoryorder': 'total ascending'})
-            st.plotly_chart(fig_threat, use_container_width=True)
+            st.plotly_chart(fig_threat, width="stretch")
 
         with viz_row2_col2:
             st.subheader("Top 10 Source IPs (Attacks)")
@@ -340,7 +349,7 @@ if uploaded_file is not None:
                     color_continuous_scale='Reds'
                 )
                 fig_ip.update_layout(yaxis={'categoryorder': 'total ascending'})
-                st.plotly_chart(fig_ip, use_container_width=True)
+                st.plotly_chart(fig_ip, width="stretch")
             else:
                 st.info("No attack events in filtered data")
         
@@ -357,8 +366,8 @@ if uploaded_file is not None:
                     timeline_df = filtered_df.dropna(subset=['parsed_time'])
                     timeline_df = timeline_df.set_index('parsed_time')
                     
-                    # Events over time
-                    events_over_time = timeline_df.resample('H').size()
+                    # Events over time (use 'h' instead of deprecated 'H')
+                    events_over_time = timeline_df.resample('h').size()
                     
                     fig_timeline = px.line(
                         x=events_over_time.index,
@@ -366,7 +375,7 @@ if uploaded_file is not None:
                         labels={'x': 'Time', 'y': 'Number of Events'},
                         title='Events Over Time (Hourly)'
                     )
-                    st.plotly_chart(fig_timeline, use_container_width=True)
+                    st.plotly_chart(fig_timeline, width="stretch")
             except Exception as e:
                 st.info("Timeline analysis not available for this data")
         
@@ -399,7 +408,7 @@ if uploaded_file is not None:
         # Display the filtered dataframe
         st.dataframe(
             display_df,
-            use_container_width=True,
+            width="stretch",
             height=min(400, (rows_to_show + 1) * 35)
         )
         
