@@ -1,5 +1,3 @@
-# src/environment/security_env.py
-
 import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
@@ -60,7 +58,6 @@ class SecurityEnv(gym.Env):
         }
         
         # --- 4. Initialize the internal state ---
-        # This holds the current event being analyzed. It MUST be initialized to None.
         self.current_analysis = None
         print("SecurityEnv: Initialized.")
 
@@ -107,13 +104,24 @@ class SecurityEnv(gym.Env):
         else:
             obs = self.get_obs_from_analysis(self.current_analysis)
         
-        info = {} # The info dict is used for debugging, can be empty
+        info = {}
         return obs, info
 
     def step(self, action):
         """
         Executes the agent's chosen action and calculates the reward.
         This is the core of the learning process.
+        
+        Reward function logic:
+        - For ACTUAL ATTACKS:
+          - Do Nothing: -100 (heavy penalty)
+          - Monitor: +5 (small reward)
+          - Block IP: +50 to +100 (high reward, higher for critical)
+        
+        - For NORMAL traffic:
+          - Do Nothing: +20 (high reward)
+          - Monitor: -5 (small penalty)
+          - Block IP: -200 (massive penalty for false positive)
         """
         if self.current_analysis is None:
             raise ValueError("`step()` was called before an event was loaded with `set_current_analysis()`.")
@@ -130,7 +138,12 @@ class SecurityEnv(gym.Env):
             elif action == 1:  # Monitor
                 reward = 5     # Small reward, better than nothing
             elif action == 2:  # Block IP
-                reward = 100 if risk_level == 'critical' else 50 # High reward for correct action
+                if risk_level == 'critical':
+                    reward = 100
+                elif risk_level == 'high':
+                    reward = 50
+                else:
+                    reward = 25
         else:
             # The event IS NOT an attack
             if action == 0:    # Do Nothing
@@ -146,4 +159,3 @@ class SecurityEnv(gym.Env):
         next_observation = self.get_obs_from_analysis(self.current_analysis)
 
         return next_observation, reward, terminated, truncated, info
-
