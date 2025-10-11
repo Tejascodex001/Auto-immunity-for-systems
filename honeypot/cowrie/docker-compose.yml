@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  cowrie:
+    image: cowrie/cowrie
+    container_name: ais_ssh_honeypot
+    ports:
+      # This maps port 2222 on your HOST machine to port 2222 inside the container.
+      # We use 2222 to avoid conflict with your real SSH service on port 22.
+      - "2222:2222"
+    volumes:
+      - ./etc:/cowrie/cowrie-git/etc  <-- Comment this line out for now
+      - ./log:/cowrie/cowrie-git/var/log
+      - ./downloads:/cowrie/cowrie-git/var/lib/cowrie/downloads
+    restart: unless-stopped
