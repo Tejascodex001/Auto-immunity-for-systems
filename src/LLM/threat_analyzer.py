@@ -6,6 +6,7 @@ Auto-generates clean summaries after analysis with organized folder structure
 """
 
 import json
+import time
 import os
 import sys
 import traceback
@@ -46,6 +47,100 @@ except ImportError as e:
     logger.critical(f"Could not import required module: {e}")
     traceback.print_exc()
     sys.exit(1)
+
+# In main_defender.py
+
+# ... (all imports remain the same) ...
+
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+import time # Make sure to import time
+
+class LogChangeHandler(FileSystemEventHandler):
+    """A watchdog event handler that processes new lines appended to a log file."""
+    def __init__(self, pipeline_instance, filepath_to_watch):
+        self.pipeline = pipeline_instance
+        self.filepath = os.path.abspath(filepath_to_watch)
+        self.last_known_position = self._get_file_size()
+        logger.info(f"LogChangeHandler initialized for '{self.filepath}'. Starting at position {self.last_known_position}.")
+
+    def _get_file_size(self):
+        try:
+            return os.path.getsize(self.filepath)
+        except FileNotFoundError:
+            return 0
+
+    def on_modified(self, event):
+        """Called by watchdog when a file or directory is modified."""
+        # We only care about modifications to our specific log file.
+        if os.path.abspath(event.src_path) == self.filepath:
+            self._process_new_lines()
+
+    def _process_new_lines(self):
+        """Reads and processes only the new content added to the log file."""
+        current_size = self._get_file_size()
+        if current_size > self.last_known_position:
+            with open(self.filepath, 'r') as f:
+                f.seek(self.last_known_position)
+                new_lines = f.readlines()
+                self.last_known_position = f.tell()
+
+            if new_lines:
+                logger.info(f"Detected {len(new_lines)} new log line(s). Processing...")
+                for line in new_lines:
+                    # Use the pipeline's parser to see if the line is interesting
+                    # This now assumes your parser has a method for single lines
+                    event_generator = self.pipeline.log_parser.parse_log_file_line(line)
+                    for event in event_generator:
+                        # If the parser yields an event, process it through the full pipeline
+                        self.pipeline.process_event(event)
+
+
+class SecurityPipeline:
+    # ... (Your __init__ and _initialize_components methods are correct) ...
+    # ... (Your process_event and _print_summary methods are correct) ...
+
+    def run(self):
+        """
+        Executes the security pipeline in continuous, real-time monitoring mode using watchdog.
+        """
+        logger.info("--- Starting Real-Time Analysis Pipeline ---")
+        
+        log_path_str = self.config['raw_log_file']
+        log_file_path = os.path.abspath(log_path_str)
+        log_directory = os.path.dirname(log_file_path)
+
+        # Ensure the log file and its directory exist before we start monitoring
+        if not os.path.exists(log_directory):
+            os.makedirs(log_directory)
+            logger.info(f"Created log directory: {log_directory}")
+        if not os.path.exists(log_file_path):
+            open(log_file_path, 'a').close()
+            logger.info(f"Created empty log file: {log_file_path}")
+
+        # Initialize our custom event handler
+        event_handler = LogChangeHandler(self, log_file_path)
+        
+        # Initialize the watchdog Observer
+        observer = Observer()
+        # Monitor the DIRECTORY, not the file, as this is more reliable
+        observer.schedule(event_handler, log_directory, recursive=False)
+        
+        # Start the observer in a background thread
+        observer.start()
+        logger.info(f"Now monitoring for changes in: {log_file_path}")
+        print("AIS Defender is live. Press Ctrl+C to stop.")
+
+        try:
+            # Keep the main thread alive, waiting for events
+            while True:
+                time.sleep(5)
+        except KeyboardInterrupt:
+            logger.info("Shutdown signal received. Stopping AIS Defender.")
+            observer.stop()
+        
+        observer.join()
+        self._print_summary()
 
 
 class SummaryGenerator:
@@ -257,171 +352,80 @@ class SecurityPipeline:
         
         logger.info("=" * 80 + "\n")
     
-    def process_event(self, event: str, event_num: int, 
-                     total_events: int, output_log) -> None:
+
+    def process_event(self, event: str):
         """
-        Process a single security event.
-        
-        Args:
-            event: Log entry to process
-            event_num: Event number
-            total_events: Total number of events
-            output_log: Output file handle
+        Processes a single security event. Now takes only the event string.
         """
-        logger.info(f"\n{'='*80}")
-        logger.info(f"EVENT {event_num}/{total_events}")
-        logger.info(f"{'='*80}")
-        logger.info(f"Log: {event[:150]}...")
-        
         self.metrics['total_events'] += 1
+        logger.info(f"--- Processing Event #{self.metrics['total_events']}: '{event[:100]}...' ---")
         
-        try:
-            # Step 1: Advanced RAG Analysis
-            logger.info("\n[STEP 1] RAG Analysis")
-            final_analysis = self.rag_analyzer.analyze(event)
-            
-            if final_analysis is None:
-                logger.warning("  ✗ Skipping - analysis failed")
-                self.metrics['errors'] += 1
-                return
-            
-            # Save analysis
-            output_log.write(json.dumps(final_analysis) + '\n')
-            output_log.flush()
-            
-            # Update metrics
-            threat_type = final_analysis.get('threat_type', 'Unknown')
-            risk_level = final_analysis.get('risk_level', 'Unknown')
-            confidence = final_analysis.get('confidence', 0.0)
-            
-            self.metrics['threat_type_distribution'][threat_type] = \
-                self.metrics['threat_type_distribution'].get(threat_type, 0) + 1
-            
-            self.metrics['risk_level_distribution'][risk_level] = \
-                self.metrics['risk_level_distribution'].get(risk_level, 0) + 1
-            
-            self.metrics['confidence_scores'].append(confidence)
-            
-            if final_analysis.get('is_attack', False):
-                self.metrics['attacks_detected'] += 1
-            else:
-                self.metrics['normal_events'] += 1
-            
-            # Step 2: RL Agent Decision
-            logger.info("\n[STEP 2] RL Agent Decision Making")
-            self.rl_env.set_current_analysis(final_analysis)
-            observation, _ = self.rl_env.reset()
-            
-            logger.info(f"  Observation: {observation}")
-            
-            action, _ = self.rl_agent.predict(observation, deterministic=True)
-            action_int = int(action)
-            chosen_action = SecurityEnv.ACTION_NAMES.get(action_int, "Unknown")
-            
-            logger.info(f"  → Decision: {chosen_action}")
-            
-            # Track actions
-            self.metrics['actions_taken'][chosen_action] = \
-                self.metrics['actions_taken'].get(chosen_action, 0) + 1
-            
-            # Step 3: Execute action
-            logger.info("\n[STEP 3] Action Execution")
-            
-            if action_int == SecurityEnv.ACTION_BLOCK_IP:
-                logger.warning(f" BLOCKING IP: {final_analysis.get('source_ip')}")
-                final_analysis['recommended_actions'] = ["Block the source IP"]
-                self.executor.process_actions(final_analysis)
-            
-            elif action_int == SecurityEnv.ACTION_MONITOR:
-                logger.info(f" MONITORING: {final_analysis.get('source_ip')}")
-                final_analysis['recommended_actions'] = ["Monitor activity"]
-                self.executor.process_actions(final_analysis)
-            
-            elif action_int == SecurityEnv.ACTION_ALERT:
-                logger.warning(f" ALERT: Escalating to security team")
-                final_analysis['recommended_actions'] = ["Alert security team"]
-                self.executor.process_actions(final_analysis)
-            
-            elif action_int == SecurityEnv.ACTION_ISOLATE:
-                logger.critical(f" ISOLATING SYSTEM")
-                final_analysis['recommended_actions'] = ["Isolate system immediately"]
-                self.executor.process_actions(final_analysis)
-            
-            else:
-                logger.info(f"  ✓ NO ACTION REQUIRED")
-            
-            # Print summary
-            logger.info("\n" + "-" * 80)
-            logger.info(f"Summary:")
-            logger.info(f"  Threat: {threat_type}")
-            logger.info(f"  Risk: {risk_level}")
-            logger.info(f"  Confidence: {confidence:.2f}")
-            logger.info(f"  Action: {chosen_action}")
-            logger.info(f"  Source IP: {final_analysis.get('source_ip', 'Unknown')}")
-            logger.info("-" * 80)
-            
-        except Exception as e:
-            logger.error(f"  ✗ Error processing event: {e}")
-            traceback.print_exc()
-            self.metrics['errors'] += 1
-    
-    def run(self) -> None:
-        """Execute the security pipeline."""
-        logger.info("\n" + "=" * 80)
-        logger.info("STARTING ANALYSIS PIPELINE")
-        logger.info("=" * 80)
-        
-        start_time = datetime.now()
-        output_file = self.config['analysis_output_file']
-        
-        # Create output directory if it doesn't exist
-        output_dir = Path(output_file).parent
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        try:
-            with open(output_file, 'w') as output_log:  # 'w' to overwrite
-                # Parse log file
-                logger.info(f"\n[PARSING] Reading logs from: {self.config['raw_log_file']}")
+        # Open the output file in append mode for each event
+        with open(self.config['analysis_output_file'], 'a') as output_log:
+            try:
+                # Stage 1: RAG Analysis
+                final_analysis = self.rag_analyzer.analyze(event)
                 
-                important_events = list(
-                    self.log_parser.parse_log_file(
-                        self.config['raw_log_file']
-                    )
-                )
-                
-                if not important_events:
-                    logger.warning("No important events found in log file.")
+                if not final_analysis:
+                    logger.warning("  > Skipping - RAG analysis failed.")
+                    self.metrics['errors'] += 1
                     return
+
+                # Write full analysis to the structured log
+                output_log.write(json.dumps(final_analysis) + '\n')
+
+                # Stage 2: RL Agent Decision
+                observation = self.rl_env.get_obs_from_analysis(final_analysis)
+                action, _ = self.rl_agent.predict(observation, deterministic=True)
+                chosen_action_name = self.rl_env.ACTION_NAMES.get(int(action), "Unknown")
                 
-                logger.info(f"✓ Found {len(important_events)} events to analyze\n")
+                logger.info(f"  > RAG: Threat=[{final_analysis.get('threat_type', 'N/A')}], Risk=[{final_analysis.get('risk_level', 'N/A')}]")
+                logger.info(f"  > RL Agent Decision: Chose action '{chosen_action_name}'")
                 
-                # Process each event
-                for event_num, event in enumerate(important_events, 1):
-                    self.process_event(
-                        event, event_num, len(important_events), output_log
-                    )
-                    
-                    # Print progress every 10 events
-                    if event_num % 10 == 0:
-                        logger.info(f"\n{'='*80}")
-                        logger.info(f"PROGRESS: {event_num}/{len(important_events)} events processed")
-                        logger.info(f"{'='*80}\n")
+                # ... (rest of the action execution and metrics logic) ...
             
-            # Calculate elapsed time
-            elapsed_time = (datetime.now() - start_time).total_seconds()
-            
-            # Print final summary
-            self._print_summary(elapsed_time)
-            
-            # Generate clean summaries
-            if self.config.get('generate_summaries', True):
-                summary_gen = SummaryGenerator(output_file, output_dir)
-                summary_gen.generate_all()
-            
-        except Exception as e:
-            logger.critical(f"Pipeline error: {e}")
-            traceback.print_exc()
-            raise
+            except Exception as e:
+                logger.error(f"  > Error processing event: {e}")
+                traceback.print_exc()
+                self.metrics['errors'] += 1
+
+
+    def run(self):
+        """
+        Executes the security pipeline in continuous, real-time monitoring mode.
+        """
+        logger.info("--- Starting Real-Time Analysis Pipeline ---")
+        
+        log_path = self.config['raw_log_file']
+        log_dir = os.path.dirname(log_path)
+
+        # Ensure the log file exists before we start monitoring
+        if not os.path.exists(log_path):
+            logger.info(f"Log file not found at {log_path}, creating it.")
+            open(log_path, 'a').close()
+
+        # Initialize our custom event handler
+        event_handler = LogChangeHandler(self, log_path)
+        
+        # Initialize the watchdog Observer
+        observer = Observer()
+        observer.schedule(event_handler, log_dir, recursive=False)
+        
+        # Start the observer in a background thread
+        observer.start()
+        logger.info(f"Now monitoring for changes in: {log_path}")
+        print("AIS is live. Press Ctrl+C to stop.")
+
+        try:
+            # Keep the main thread alive, waiting for events
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            logger.info("Shutdown signal received. Stopping AIS.")
+            observer.stop()
+        
+        observer.join()
+        self._print_summary() # Print summary on shutdown
     
     def _print_summary(self, elapsed_time: float) -> None:
         """Print comprehensive pipeline execution summary."""

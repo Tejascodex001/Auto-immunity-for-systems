@@ -58,6 +58,15 @@ class LogParser:
                 except Exception as e:
                     print(f"WARNING [LogParser]: Could not process line {line_num} in {log_file_path}. Error: {e}")
 
+    # In your LogParser class...
+    
+    def parse_log_file_line(self, line: str):
+        """Parses a single line instead of a whole file."""
+        if self.keyword_regex.search(line):
+            # Clean and yield the important part of the message
+            cleaned_line = re.sub(r"\[.*?\]\s\[.*?\]\s", "", line.strip())
+            yield cleaned_line
+
 # This part allows you to test the parser on its own
 if __name__ == '__main__':
     print("--- Testing LogParser as a standalone script ---")

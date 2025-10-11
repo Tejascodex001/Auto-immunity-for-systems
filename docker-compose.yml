@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # --- The Victim Service ---
+  # This is your vulnerable Node.js web application
+  victim:
+    build:
+      context: ./test_web  # Points to your test_web directory
+    container_name: victim-website
+    ports:
+      - "3000:3000"
+    volumes:
+      # This is CRITICAL: It makes the victim's logs visible to the Defender on your host machine
+      - ./test_web/logs:/app/logs
+    networks:
+      - ais_network
+
+  # --- The Attacker Service ---
+  # This is your containerized FastAPI Attack Orchestrator API
+  attacker:
+    build:
+      context: ./attack_orchestrator
+      dockerfile: attacker.Dockerfile # Specify the renamed Dockerfile
+    container_name: attacker-api
+    ports:
+      - "8000:8000"
+    networks:
+      - ais_network
+
+networks:
+  ais_network:
+    driver: bridge
