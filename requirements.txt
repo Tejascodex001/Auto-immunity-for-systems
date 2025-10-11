@@ -1,0 +1,15 @@
+cat > requirements.txt << 'EOF'
+# Core Application & AI
+ollama
+pandas
+scikit-learn
+stable-baselines3
+gymnasium
+
+# Real-time File Monitoring
+watchdog
+
+# Web Dashboard
+streamlit
+plotly
+EOF
