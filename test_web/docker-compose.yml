@@ -5,8 +5,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
-      - /app/node_modules 
+      # This correctly maps the 'logs' folder from your project directory
+      # to the '/app/logs' folder inside the container.
       - ./logs:/app/logs
-    environment:
-      - NODE_ENV=development

@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
+  <title>Dashboard | AIS Portal</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome!</h1>
-    <p>You’ve successfully logged in.</p>
-    <button onclick="logout()">Logout</button>
+  <div class="home-container">
+    <div class="home-content">
+      <h1>AIS Secure Dashboard</h1>
+      <p>Welcome, you have successfully authenticated.</p>
+      
+      <div class="dashboard-widgets">
+        <!-- You can add more content here later -->
+        <p><strong>Status:</strong> All systems operational.</p>
+        <p>This is a protected area. Your activity is being monitored by the Adaptive Intelligence Shield (AIS).</p>
+      </div>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
   </div>
 
   <script>
+    // Simple logout function
     function logout() {
+      // In a real app, you would also clear session/token here
       window.location.href = "login.html";
     }
   </script>
