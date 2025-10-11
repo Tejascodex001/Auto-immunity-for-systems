@@ -70,7 +70,7 @@ docker-compose up --build -d
 ```
 This will build and start the **victim-website** and **attacker-api containers**.
 
-## Terminal 2: Start the Defender (AIS)
+**Terminal 2: Start the Defender (AIS)**
 
 ```bash
 conda activate ais
@@ -78,7 +78,7 @@ python main_defender.py
 ```
 The AIS is now live and monitoring the victim's log file.
 
-## Terminal 3: Launch the Attacks
+**Terminal 3: Launch the Attacks**
 
 ```bash
 conda activate ais
