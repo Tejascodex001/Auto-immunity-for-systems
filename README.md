@@ -102,14 +102,3 @@ streamlit run dashboard/app.py
 
 Upload the analysis_results.jsonl file in the web interface to see the visualizations
 
-### What to Do After Running the Commands
-
-1.  **Review the Files:** Open `requirements.txt` and `README.md` in your code editor to make sure they look correct.
-2.  **Add Architecture Diagram (Optional but Recommended):** Create a simple diagram (using a tool like diagrams.net, Excalidraw, or even PowerPoint) that shows the three components (Victim, Attacker, Defender) and the flow of information between them. Upload this image to a service (like an anonymous image host or a GitHub issue) and paste the link into the `README.md`.
-3.  **Commit to Git:** These are essential project files. Add them to your version control.
-    ```bash
-    git add requirements.txt README.md
-    git commit -m "docs: Add initial README and project requirements"
-    ```
-
-You now have a well-documented and easily reproducible project.
