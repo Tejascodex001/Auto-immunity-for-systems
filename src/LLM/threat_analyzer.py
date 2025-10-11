@@ -491,7 +491,7 @@ def main():
     config = {
         # Data paths
         'knowledge_base_dir': "/home/tejas/Projects/AIS/data/",
-        'raw_log_file': "/home/tejas/Projects/AIS/app.log",
+        'raw_log_file': "/home/tejas/Projects/AIS/test_web/logs/app.log",
         'analysis_output_file': "/home/tejas/Projects/AIS/analysis_results.jsonl",
         'rl_agent_path': "/home/tejas/Projects/AIS/ais_rl_agent_ppo.zip",
         

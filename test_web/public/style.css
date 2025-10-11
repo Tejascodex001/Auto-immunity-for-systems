@@ -1,58 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background: #eef1f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
 }
 
-.container {
-  text-align: center;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+.auth-container {
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    border-top: 5px solid #007bff;
 }
 
-input {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 80%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.home-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007bff;
+    margin: 0;
+}
+
+.header p {
+    color: #666;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Important for padding and width */
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
 }
 
 button {
-  padding: 10px 20px;
-  background: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-  background: #357ab8;
+    background: #0056b3;
 }
 
-p {
-  margin-top: 10px;
+.footer-text {
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
 }
 
-a {
-  color: #4a90e2;
-  text-decoration: none;
+.footer-text a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
 }
 
-a:hover {
-  text-decoration: underline;
+.footer-text a:hover {
+    text-decoration: underline;
 }
 
 #message {
-  color: #333;
-  font-weight: bold;
-  margin-top: 10px;
+    color: #d9534f; /* Red for errors by default */
+    font-weight: 500;
+    margin-top: 15px;
+    height: 20px; /* Reserve space */
+}
+
+.home-content h1 {
+    font-size: 32px;
+    color: #333;
+}
+
+.home-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.home-content .logout-btn {
+    width: auto;
+    padding: 10px 30px;
+    background: #dc3545;
+}
+
+.home-content .logout-btn:hover {
+    background: #c82333;
 }
