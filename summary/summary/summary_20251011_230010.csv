@@ -1,0 +1,36 @@
+time,ip,attack_type,risk,is_attack,confidence
+2025-10-11 22:59:36,172.18.0.1,Brute Force,Critical,Yes,0.69
+2025-10-11 22:59:37,172.18.0.1,Brute Force,Critical,Yes,0.69
+2025-10-11 22:59:38,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:39,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:40,172.18.0.1,SQL Injection,Critical,Yes,0.69
+2025-10-11 22:59:41,172.18.0.1,SQL Injection,Critical,Yes,0.69
+2025-10-11 22:59:42,172.18.0.1,Normal,Low,No,0.63
+2025-10-11 22:59:43,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:44,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:45,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:46,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:47,172.18.0.1,Brute Force,Critical,Yes,0.69
+2025-10-11 22:59:48,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:49,172.18.0.1,Brute Force,Critical,Yes,0.90
+2025-10-11 22:59:50,172.18.0.1,Brute Force,Critical,Yes,0.90
+2025-10-11 22:59:51,172.18.0.1,Brute Force,High,Yes,0.69
+2025-10-11 22:59:52,172.18.0.1,Normal,Low,No,0.69
+2025-10-11 22:59:53,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:54,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:55,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:56,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:57,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:58,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 22:59:59,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:00,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:01,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:02,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:03,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:04,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:05,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:06,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:07,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:08,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:09,172.18.0.1,DDoS,Critical,Yes,0.94
+2025-10-11 23:00:10,172.18.0.1,DDoS,Critical,Yes,0.94
