@@ -2,7 +2,7 @@
 """
 Complete AI-Driven Security Analysis Pipeline
 Integrates: Log Parser → Advanced RAG → RL Agent → Executor
-Auto-generates clean summaries after analysis
+Auto-generates clean summaries after analysis with organized folder structure
 """
 
 import json
@@ -39,8 +39,8 @@ try:
     from log_parser.log_parser import LogParser
     from environment.security_env import SecurityEnv
     
-    # Import the AdvancedRAGAnalyzer
-    from LLM.advanced_rag_analyzer import AdvancedRAGAnalyzer
+    # Import the HybridThreatDetector
+    from LLM.advanced_rag_analyzer import HybridThreatDetector
     
 except ImportError as e:
     logger.critical(f"Could not import required module: {e}")
@@ -49,24 +49,37 @@ except ImportError as e:
 
 
 class SummaryGenerator:
-    """Generates clean summaries from analysis results."""
+    """Generates clean summaries from analysis results with organized folder structure."""
     
     def __init__(self, analysis_file: str, output_dir: str = None):
         """
-        Initialize summary generator.
+        Initialize summary generator with organized folder structure.
         
         Args:
             analysis_file: Path to analysis results JSONL file
-            output_dir: Directory for output files
+            output_dir: Base directory for output files
         """
         self.analysis_file = Path(analysis_file)
-        self.output_dir = Path(output_dir) if output_dir else self.analysis_file.parent
+        self.base_output_dir = Path(output_dir) if output_dir else self.analysis_file.parent
+        
+        # Create main summary folder
+        self.summary_dir = self.base_output_dir / "summary"
+        self.summary_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create subdirectories
+        self.json_dir = self.summary_dir / "json"
+        self.summary_csv_dir = self.summary_dir / "summary"
+        self.attacks_dir = self.summary_dir / "attacks"
+        
+        self.json_dir.mkdir(parents=True, exist_ok=True)
+        self.summary_csv_dir.mkdir(parents=True, exist_ok=True)
+        self.attacks_dir.mkdir(parents=True, exist_ok=True)
         
         # Generate timestamped output filenames
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.csv_summary = self.output_dir / f"summary_{timestamp}.csv"
-        self.attacks_csv = self.output_dir / f"attacks_{timestamp}.csv"
-        self.json_summary = self.output_dir / f"summary_{timestamp}.json"
+        self.csv_summary = self.summary_csv_dir / f"summary_{timestamp}.csv"
+        self.attacks_csv = self.attacks_dir / f"attacks_{timestamp}.csv"
+        self.json_summary = self.json_dir / f"summary_{timestamp}.json"
     
     def load_records(self) -> List[Dict[str, Any]]:
         """Load analysis records from JSONL file."""
@@ -99,7 +112,7 @@ class SummaryGenerator:
         }
     
     def generate_csv(self, records: List[Dict[str, Any]]) -> None:
-        """Generate CSV summary (all events)."""
+        """Generate CSV summary (all events) in summary subfolder."""
         with open(self.csv_summary, 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=['time', 'ip', 'attack_type', 'risk', 'is_attack', 'confidence'])
             writer.writeheader()
@@ -108,10 +121,10 @@ class SummaryGenerator:
                 summary = self.extract_summary(record)
                 writer.writerow(summary)
         
-        logger.info(f"✓ CSV summary: {self.csv_summary.name}")
+        logger.info(f"✓ CSV summary: summary/{self.csv_summary.name}")
     
     def generate_attacks_csv(self, records: List[Dict[str, Any]]) -> None:
-        """Generate CSV with attacks only."""
+        """Generate CSV with attacks only in attacks subfolder."""
         attacks = [r for r in records if r.get('is_attack', False)]
         
         with open(self.attacks_csv, 'w', newline='') as f:
@@ -132,10 +145,10 @@ class SummaryGenerator:
                 }
                 writer.writerow(row)
         
-        logger.info(f"✓ Attacks CSV: {self.attacks_csv.name} ({len(attacks)} attacks)")
+        logger.info(f"Attacks CSV: attacks/{self.attacks_csv.name} ({len(attacks)} attacks)")
     
     def generate_json(self, records: List[Dict[str, Any]]) -> None:
-        """Generate JSON summary."""
+        """Generate JSON summary in json subfolder."""
         summaries = [self.extract_summary(record) for record in records]
         attacks = sum(1 for s in summaries if s['is_attack'] == 'Yes')
         
@@ -150,10 +163,10 @@ class SummaryGenerator:
         with open(self.json_summary, 'w') as f:
             json.dump(output, f, indent=2)
         
-        logger.info(f"✓ JSON summary: {self.json_summary.name}")
+        logger.info(f"JSON summary: json/{self.json_summary.name}")
     
     def generate_all(self) -> None:
-        """Generate all summary files."""
+        """Generate all summary files in organized structure."""
         logger.info("\n" + "=" * 80)
         logger.info("GENERATING CLEAN SUMMARIES")
         logger.info("=" * 80)
@@ -170,7 +183,11 @@ class SummaryGenerator:
         
         # Print quick stats
         attacks = sum(1 for r in records if r.get('is_attack', False))
-        logger.info(f"\n📊 Summary: {len(records)} events, {attacks} attacks ({100*attacks/len(records):.1f}%)")
+        logger.info(f"\nSummary: {len(records)} events, {attacks} attacks ({100*attacks/len(records):.1f}%)")
+        logger.info(f"Output folder structure: {self.summary_dir}/")
+        logger.info(f"  ├── json/")
+        logger.info(f"  ├── summary/")
+        logger.info(f"  └── attacks/")
         logger.info("=" * 80 + "\n")
 
 
@@ -212,12 +229,9 @@ class SecurityPipeline:
         
         # Initialize Advanced RAG analyzer
         logger.info("[INIT] Loading Advanced RAG Analyzer...")
-        self.rag_analyzer = AdvancedRAGAnalyzer(
+        self.rag_analyzer = HybridThreatDetector(
             knowledge_base_dir=self.config['knowledge_base_dir'],
             llm_model=self.config.get('llm_model', 'phi3:mini'),
-            n_neighbors=self.config.get('n_neighbors', 5),
-            use_multi_query=self.config.get('use_multi_query', True),
-            use_reranking=self.config.get('use_reranking', True)
         )
         
         # Initialize executor
@@ -314,22 +328,22 @@ class SecurityPipeline:
             logger.info("\n[STEP 3] Action Execution")
             
             if action_int == SecurityEnv.ACTION_BLOCK_IP:
-                logger.warning(f"  🚫 BLOCKING IP: {final_analysis.get('source_ip')}")
+                logger.warning(f" BLOCKING IP: {final_analysis.get('source_ip')}")
                 final_analysis['recommended_actions'] = ["Block the source IP"]
                 self.executor.process_actions(final_analysis)
             
             elif action_int == SecurityEnv.ACTION_MONITOR:
-                logger.info(f"  👁️  MONITORING: {final_analysis.get('source_ip')}")
+                logger.info(f" MONITORING: {final_analysis.get('source_ip')}")
                 final_analysis['recommended_actions'] = ["Monitor activity"]
                 self.executor.process_actions(final_analysis)
             
             elif action_int == SecurityEnv.ACTION_ALERT:
-                logger.warning(f"  📢 ALERT: Escalating to security team")
+                logger.warning(f" ALERT: Escalating to security team")
                 final_analysis['recommended_actions'] = ["Alert security team"]
                 self.executor.process_actions(final_analysis)
             
             elif action_int == SecurityEnv.ACTION_ISOLATE:
-                logger.critical(f"  🔒 ISOLATING SYSTEM")
+                logger.critical(f" ISOLATING SYSTEM")
                 final_analysis['recommended_actions'] = ["Isolate system immediately"]
                 self.executor.process_actions(final_analysis)
             
@@ -359,6 +373,10 @@ class SecurityPipeline:
         
         start_time = datetime.now()
         output_file = self.config['analysis_output_file']
+        
+        # Create output directory if it doesn't exist
+        output_dir = Path(output_file).parent
+        output_dir.mkdir(parents=True, exist_ok=True)
         
         try:
             with open(output_file, 'w') as output_log:  # 'w' to overwrite
@@ -397,7 +415,7 @@ class SecurityPipeline:
             
             # Generate clean summaries
             if self.config.get('generate_summaries', True):
-                summary_gen = SummaryGenerator(output_file)
+                summary_gen = SummaryGenerator(output_file, output_dir)
                 summary_gen.generate_all()
             
         except Exception as e:
@@ -412,7 +430,7 @@ class SecurityPipeline:
         logger.info("=" * 80)
         
         # Basic stats
-        logger.info(f"\n📊 Processing Statistics:")
+        logger.info(f"\nProcessing Statistics:")
         logger.info(f"  Total events processed: {self.metrics['total_events']}")
         logger.info(f"  Attacks detected: {self.metrics['attacks_detected']}")
         logger.info(f"  Normal events: {self.metrics['normal_events']}")
@@ -431,14 +449,14 @@ class SecurityPipeline:
             min_confidence = min(self.metrics['confidence_scores'])
             max_confidence = max(self.metrics['confidence_scores'])
             
-            logger.info(f"\n🎯 Confidence Metrics:")
+            logger.info(f"\nConfidence Metrics:")
             logger.info(f"  Average: {avg_confidence:.3f}")
             logger.info(f"  Min: {min_confidence:.3f}")
             logger.info(f"  Max: {max_confidence:.3f}")
         
         # Actions taken
         if self.metrics['actions_taken']:
-            logger.info(f"\n⚡ Actions Taken:")
+            logger.info(f"\nActions Taken:")
             total_actions = sum(self.metrics['actions_taken'].values())
             for action, count in sorted(self.metrics['actions_taken'].items(), 
                                        key=lambda x: x[1], reverse=True):
@@ -447,7 +465,7 @@ class SecurityPipeline:
         
         # Threat distribution
         if self.metrics['threat_type_distribution']:
-            logger.info(f"\n🎭 Threat Type Distribution:")
+            logger.info(f"\nThreat Type Distribution:")
             sorted_threats = sorted(self.metrics['threat_type_distribution'].items(), 
                                    key=lambda x: x[1], reverse=True)
             for threat, count in sorted_threats[:10]:  # Top 10
@@ -456,7 +474,7 @@ class SecurityPipeline:
         
         # Risk distribution
         if self.metrics['risk_level_distribution']:
-            logger.info(f"\n⚠️  Risk Level Distribution:")
+            logger.info(f"\nRisk Level Distribution:")
             risk_order = ['Critical', 'High', 'Medium', 'Low', 'N/A']
             for risk in risk_order:
                 count = self.metrics['risk_level_distribution'].get(risk, 0)
@@ -474,6 +492,7 @@ class SecurityPipeline:
         
         logger.info(f"\n📁 Output:")
         logger.info(f"  Analysis results: {self.config['analysis_output_file']}")
+        logger.info(f"  Summaries folder: {Path(self.config['analysis_output_file']).parent}/summary/")
         
         logger.info("\n" + "=" * 80)
         logger.info("✓ PIPELINE COMPLETED SUCCESSFULLY")
@@ -523,7 +542,7 @@ def main():
         logger.info("\n✓ All operations completed successfully!\n")
         
     except KeyboardInterrupt:
-        logger.warning("\n\n⚠️  Pipeline interrupted by user\n")
+        logger.warning("\n\nPipeline interrupted by user\n")
         sys.exit(0)
     except Exception as e:
         logger.critical(f"\n\n✗ FATAL ERROR: {e}\n")

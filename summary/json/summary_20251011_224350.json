@@ -1,288 +1,288 @@
 {
-  "generated_at": "2025-10-11T21:07:22.679828",
+  "generated_at": "2025-10-11T22:43:50.257525",
   "total_events": 35,
-  "attacks_detected": 32,
-  "normal_events": 3,
+  "attacks_detected": 33,
+  "normal_events": 2,
   "events": [
     {
-      "time": "2025-10-11 21:06:48",
+      "time": "2025-10-11 22:43:14",
       "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:49",
+      "time": "2025-10-11 22:43:15",
       "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:50",
+      "time": "2025-10-11 22:43:16",
       "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:51",
+      "time": "2025-10-11 22:43:17",
       "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.85"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:52",
+      "time": "2025-10-11 22:43:18",
       "ip": "172.18.0.1",
       "attack_type": "SQL Injection",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:53",
+      "time": "2025-10-11 22:43:20",
       "ip": "172.18.0.1",
       "attack_type": "SQL Injection",
-      "risk": "High",
+      "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:54",
+      "time": "2025-10-11 22:43:21",
       "ip": "172.18.0.1",
       "attack_type": "Normal",
       "risk": "Low",
       "is_attack": "No",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:55",
+      "time": "2025-10-11 22:43:22",
       "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
+      "attack_type": "Brute Force",
+      "risk": "High",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:56",
+      "time": "2025-10-11 22:43:23",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:24",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:25",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:26",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:27",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:28",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 22:43:29",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 22:43:30",
+      "ip": "172.18.0.1",
+      "attack_type": "Brute Force",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.69"
+    },
+    {
+      "time": "2025-10-11 22:43:31",
       "ip": "172.18.0.1",
       "attack_type": "Normal",
       "risk": "Low",
       "is_attack": "No",
-      "confidence": "0.95"
+      "confidence": "0.69"
     },
     {
-      "time": "2025-10-11 21:06:57",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "High",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:06:59",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:00",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "High",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:01",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:02",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Critical",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:03",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Critical",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:04",
-      "ip": "172.18.0.1",
-      "attack_type": "Brute Force Attack",
-      "risk": "Medium",
-      "is_attack": "Yes",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:05",
-      "ip": "172.18.0.1",
-      "attack_type": "Normal",
-      "risk": "Low",
-      "is_attack": "No",
-      "confidence": "0.95"
-    },
-    {
-      "time": "2025-10-11 21:07:06",
+      "time": "2025-10-11 22:43:32",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:07",
+      "time": "2025-10-11 22:43:33",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:08",
+      "time": "2025-10-11 22:43:34",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:09",
+      "time": "2025-10-11 22:43:35",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:10",
+      "time": "2025-10-11 22:43:36",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:11",
+      "time": "2025-10-11 22:43:37",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:12",
+      "time": "2025-10-11 22:43:38",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:12",
+      "time": "2025-10-11 22:43:39",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:13",
+      "time": "2025-10-11 22:43:40",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:14",
+      "time": "2025-10-11 22:43:41",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:15",
+      "time": "2025-10-11 22:43:42",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:16",
+      "time": "2025-10-11 22:43:43",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:17",
+      "time": "2025-10-11 22:43:44",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:18",
+      "time": "2025-10-11 22:43:46",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:19",
+      "time": "2025-10-11 22:43:47",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:20",
+      "time": "2025-10-11 22:43:48",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:21",
+      "time": "2025-10-11 22:43:49",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     },
     {
-      "time": "2025-10-11 21:07:22",
+      "time": "2025-10-11 22:43:50",
       "ip": "172.18.0.1",
       "attack_type": "DDoS",
       "risk": "Critical",
       "is_attack": "Yes",
-      "confidence": "0.95"
+      "confidence": "0.94"
     }
   ]
 }

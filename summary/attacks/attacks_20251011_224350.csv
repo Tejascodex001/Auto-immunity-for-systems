@@ -1,0 +1,34 @@
+time,ip,attack_type,risk,confidence,action
+2025-10-11 22:43:14,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:15,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:16,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:17,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:18,172.18.0.1,SQL Injection,Critical,0.69,No action
+2025-10-11 22:43:20,172.18.0.1,SQL Injection,Critical,0.69,No action
+2025-10-11 22:43:22,172.18.0.1,Brute Force,High,0.69,No action
+2025-10-11 22:43:23,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:24,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:25,172.18.0.1,Brute Force,High,0.69,No action
+2025-10-11 22:43:26,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:27,172.18.0.1,Brute Force,Critical,0.69,No action
+2025-10-11 22:43:28,172.18.0.1,Brute Force,Critical,0.90,No action
+2025-10-11 22:43:29,172.18.0.1,Brute Force,Critical,0.90,No action
+2025-10-11 22:43:30,172.18.0.1,Brute Force,High,0.69,No action
+2025-10-11 22:43:32,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:33,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:34,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:35,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:36,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:37,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:38,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:39,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:40,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:41,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:42,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:43,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:44,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:46,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:47,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:48,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:49,172.18.0.1,DDoS,Critical,0.94,No action
+2025-10-11 22:43:50,172.18.0.1,DDoS,Critical,0.94,No action
