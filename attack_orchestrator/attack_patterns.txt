@@ -1,0 +1,20 @@
+# Simple SQL Injection Probes
+'|%27
+
+# Common XSS Probes
+<script>
+
+# Path Traversal Attempts
+\.\./
+
+# Probing for sensitive files
+\.env|config\.php|\.git
+
+# Malicious User Agents
+Nikto|sqlmap|masscan
+
+# Log4Shell / JNDI Injection
+\$\{jndi:
+
+# Shellshock
+\(\)\s*\{
