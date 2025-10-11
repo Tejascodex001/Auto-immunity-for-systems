@@ -1,0 +1,94 @@
+time,ip,attack_type,risk,is_attack,confidence
+2025-10-11 16:37:47,192.168.1.100,Normal,N/A,No,0.95
+2025-10-11 16:37:47,192.168.1.105,Normal,N/A,No,0.95
+2025-10-11 16:37:47,Unknown,Exploit,Critical,Yes,0.97
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Normal,Low,No,0.70
+2025-10-11 16:37:47,103.207.39.21,Exploit,Critical,Yes,0.97
+2025-10-11 16:37:47,45.67.89.123,Normal,Low,No,0.70
+2025-10-11 16:37:47,45.67.89.123,Brute Force Attack,High,Yes,0.80
+2025-10-11 16:37:47,Unknown,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,198.51.100.42,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,198.51.100.42,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,198.51.100.42,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,198.51.100.42,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,198.51.100.42,SQL Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,Unknown,Command Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.55,Command Injection,Critical,Yes,0.97
+2025-10-11 16:37:47,203.0.113.55,Normal,Low,No,0.70
+2025-10-11 16:37:47,203.0.113.55,Command Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.55,Command Injection,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.55,Normal,Low,No,0.70
+2025-10-11 16:37:47,Unknown,Normal,Low,No,0.70
+2025-10-11 16:37:47,172.16.0.88,Cross-Site Scripting,High,Yes,0.75
+2025-10-11 16:37:47,172.16.0.88,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,172.16.0.88,Cross-Site Scripting,High,Yes,0.75
+2025-10-11 16:37:47,Unknown,DDoS,Critical,Yes,0.90
+2025-10-11 16:37:47,10.0.0.50,DDoS,Critical,Yes,0.90
+2025-10-11 16:37:47,Unknown,DDoS,Critical,Yes,0.90
+2025-10-11 16:37:47,Unknown,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,10.0.0.50,DDoS,Critical,Yes,0.90
+2025-10-11 16:37:47,10.0.0.100,DDoS,Critical,Yes,0.90
+2025-10-11 16:37:47,172.16.1.200,Port Scanning,Medium,Yes,0.50
+2025-10-11 16:37:47,172.16.1.200,Port Scanning,Medium,Yes,0.50
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.50.25,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,185.220.101.42,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.50.25,Normal,Low,No,0.70
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,Unknown,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.99,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.99,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.99,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.99,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,203.0.113.99,Exploit,Critical,Yes,0.98
+2025-10-11 16:37:47,198.51.100.150,Path Traversal,High,Yes,0.80
+2025-10-11 16:37:47,198.51.100.150,Path Traversal,High,Yes,0.80
+2025-10-11 16:37:47,198.51.100.150,Normal,Low,No,0.70
+2025-10-11 16:37:47,198.51.100.150,Normal,Low,No,0.70
+2025-10-11 16:37:47,10.10.10.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,10.10.10.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,10.10.10.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,10.10.10.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,10.10.10.75,Exploit,Critical,Yes,0.95
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.100.50,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.100.50,Malware,Critical,Yes,0.98
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.100.50,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,192.168.100.0,Malware,Critical,Yes,0.98
+2025-10-11 16:37:47,Unknown,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.75.30,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.75.30,Unauthorized Access,High,Yes,0.75
+2025-10-11 16:37:47,192.168.75.30,Privilege Escalation,Critical,Yes,0.90
+2025-10-11 16:37:47,192.168.75.30,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.75.30,Normal,Low,No,0.70
+2025-10-11 16:37:47,185.220.101.88,Data Exfiltration,Critical,Yes,0.90
+2025-10-11 16:37:47,Unknown,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.80.15,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.80.15,Unauthorized Access,High,Yes,0.75
+2025-10-11 16:37:47,Unknown,Normal,Low,No,0.70
+2025-10-11 16:37:47,Unknown,XXE,High,Yes,0.80
+2025-10-11 16:37:47,203.0.113.200,XXE,High,Yes,0.80
+2025-10-11 16:37:47,203.0.113.200,Exploit,Critical,Yes,0.98
+2025-10-11 16:37:47,203.0.113.200,Normal,Low,No,0.70
+2025-10-11 16:37:47,172.16.5.99,Normal,Low,No,0.70
+2025-10-11 16:37:47,172.16.5.99,Unauthorized Access,High,Yes,0.75
+2025-10-11 16:37:47,172.16.5.99,Normal,Low,No,0.70
+2025-10-11 16:37:47,Unknown,Fuzzing,Medium,Yes,0.60
+2025-10-11 16:37:47,198.51.100.250,Exploit,Critical,Yes,0.87
+2025-10-11 16:37:47,198.51.100.250,Fuzzing,Medium,Yes,0.60
+2025-10-11 16:37:47,185.220.101.150,Normal,Low,No,0.70
+2025-10-11 16:37:47,185.220.101.150,Port Scanning,Medium,Yes,0.50
+2025-10-11 16:37:47,Unknown,Malware,Critical,Yes,0.95
+2025-10-11 16:37:47,185.220.101.150,Data Exfiltration,Critical,Yes,0.90
+2025-10-11 16:37:47,203.0.113.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,203.0.113.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,203.0.113.75,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.90.40,Normal,Low,No,0.70
+2025-10-11 16:37:47,192.168.90.40,Unauthorized Access,High,Yes,0.75

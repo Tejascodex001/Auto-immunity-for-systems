@@ -1,0 +1,752 @@
+{
+  "generated_at": "2025-10-11T16:37:47.657643",
+  "total_events": 93,
+  "attacks_detected": 59,
+  "normal_events": 34,
+  "events": [
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.1.100",
+      "attack_type": "Normal",
+      "risk": "N/A",
+      "is_attack": "No",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.1.105",
+      "attack_type": "Normal",
+      "risk": "N/A",
+      "is_attack": "No",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.97"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "103.207.39.21",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.97"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "45.67.89.123",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "45.67.89.123",
+      "attack_type": "Brute Force Attack",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.80"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.42",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.42",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.42",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.42",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.42",
+      "attack_type": "SQL Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Command Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.55",
+      "attack_type": "Command Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.97"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.55",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.55",
+      "attack_type": "Command Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.55",
+      "attack_type": "Command Injection",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.55",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.0.88",
+      "attack_type": "Cross-Site Scripting",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.0.88",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.0.88",
+      "attack_type": "Cross-Site Scripting",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "DDoS",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.0.0.50",
+      "attack_type": "DDoS",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "DDoS",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.0.0.50",
+      "attack_type": "DDoS",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.0.0.100",
+      "attack_type": "DDoS",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.1.200",
+      "attack_type": "Port Scanning",
+      "risk": "Medium",
+      "is_attack": "Yes",
+      "confidence": "0.50"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.1.200",
+      "attack_type": "Port Scanning",
+      "risk": "Medium",
+      "is_attack": "Yes",
+      "confidence": "0.50"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.50.25",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "185.220.101.42",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.50.25",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.99",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.99",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.99",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.99",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.99",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.98"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.150",
+      "attack_type": "Path Traversal",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.80"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.150",
+      "attack_type": "Path Traversal",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.80"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.150",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.150",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.10.10.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.10.10.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.10.10.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.10.10.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "10.10.10.75",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.100.50",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.100.50",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.98"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.100.50",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.100.0",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.98"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.75.30",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.75.30",
+      "attack_type": "Unauthorized Access",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.75.30",
+      "attack_type": "Privilege Escalation",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.75.30",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.75.30",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "185.220.101.88",
+      "attack_type": "Data Exfiltration",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.80.15",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.80.15",
+      "attack_type": "Unauthorized Access",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "XXE",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.80"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.200",
+      "attack_type": "XXE",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.80"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.200",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.98"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.200",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.5.99",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.5.99",
+      "attack_type": "Unauthorized Access",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "172.16.5.99",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Fuzzing",
+      "risk": "Medium",
+      "is_attack": "Yes",
+      "confidence": "0.60"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.250",
+      "attack_type": "Exploit",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.87"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "198.51.100.250",
+      "attack_type": "Fuzzing",
+      "risk": "Medium",
+      "is_attack": "Yes",
+      "confidence": "0.60"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "185.220.101.150",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "185.220.101.150",
+      "attack_type": "Port Scanning",
+      "risk": "Medium",
+      "is_attack": "Yes",
+      "confidence": "0.50"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "Unknown",
+      "attack_type": "Malware",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.95"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "185.220.101.150",
+      "attack_type": "Data Exfiltration",
+      "risk": "Critical",
+      "is_attack": "Yes",
+      "confidence": "0.90"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "203.0.113.75",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.90.40",
+      "attack_type": "Normal",
+      "risk": "Low",
+      "is_attack": "No",
+      "confidence": "0.70"
+    },
+    {
+      "time": "2025-10-11 16:37:47",
+      "ip": "192.168.90.40",
+      "attack_type": "Unauthorized Access",
+      "risk": "High",
+      "is_attack": "Yes",
+      "confidence": "0.75"
+    }
+  ]
+}
