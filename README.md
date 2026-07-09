@@ -17,7 +17,6 @@ The project is built on a modular, three-part architecture that simulates a comp
     *   **Analyzes** threats using an LLM-based RAG system.
     *   **Decides** on the best action using a pre-trained Reinforcement Learning agent.
     *   **Executes** defensive actions (e.g., blocking IPs) via the Executor module.
- <!-- Optional: Add a link to an architecture diagram -->
 
 ---
 
@@ -34,7 +33,7 @@ The project is built on a modular, three-part architecture that simulates a comp
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone (https://github.com/Tejascodex001/Auto-immunity-for-systems.git)
     cd AIS
     ```
 
@@ -48,7 +47,7 @@ The project is built on a modular, three-part architecture that simulates a comp
 3.  **Train the RL Agent (One-time setup):**
     The RL agent must be trained on a historical dataset before the main system can run.
     ```bash
-    # Make sure your training data (e.g., UNSW_finetuning.jsonl) is in the /data folder
+    # Make sure your training data (e.g., UNSW_finetuning.jsonl)
     cd src/agents
     python train_agent.py
     # This will create the 'ais_rl_agent_ppo.zip' file.
