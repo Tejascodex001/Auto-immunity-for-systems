@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # AIS: Auto Immunity for Systems
 
 **AIS** is a self-learning security system that uses a hybrid AI approach to detect, analyze, and respond to cyber threats in real-time. It combines a Retrieval-Augmented Generation (RAG) pipeline using Large Language Models (LLMs) with a Reinforcement Learning (RL) agent to create a dynamic and intelligent defense mechanism.
