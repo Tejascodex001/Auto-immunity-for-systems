@@ -33,7 +33,7 @@ The project is built on a modular, three-part architecture that simulates a comp
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Tejascodex001/Auto-immunity-for-systems.git
+    git clone https://github.com/Tejascodex001/Auto-immunity-for-systems.git AIS
     cd AIS
     ```
 
